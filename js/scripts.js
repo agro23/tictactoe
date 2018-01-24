@@ -15,6 +15,28 @@ function buildSpace(coordinate) {
 //   $(".board").html(thing);
 // }
 
+function Player(name, userType, iWon, winTotal) {
+  this.name = name;
+  this.userType = userType;
+  this.iWon = iWon;
+  this.winTotal = winTotal;
+}
+
+Player.prototype.getName = function(name) {
+  if (this.name === "" || this.name === null ) {
+    var name = prompt("What is your name?");
+  }
+  this.name = name;
+  return name;
+}
+
+// Player prototypes:
+// Did I win?
+// changeUserType -- do they want to be X or O this time?
+// changeName
+// am I Human?
+// get my name
+
 function Space(spaceNum, marker) {
   this.spaceNum = spaceNum;
   this.marker = marker;
@@ -39,9 +61,12 @@ Board.prototype.buildBoard = function() {
   return this.spaces;
 }
 
-function placeInSpace(thing, coordinate) {
-  $("#space" + coordinate).text(thing);
-}
+
+
+
+// function placeInSpace(thing, coordinate) {
+//   $("#space" + coordinate).text(thing);
+// }
 
 function displayBoard(board) {
   var tempBoardString = "<div class='experiment'>";
@@ -54,8 +79,6 @@ function displayBoard(board) {
   tempBoardString += "</div>"
   $(".board").html(tempBoardString);
 }
-
-
 
 $(document).ready(function() {
   var userType = getUser();
@@ -74,4 +97,13 @@ $(document).ready(function() {
   space1.updateMarker(userType);
   console.log("Space is now:" + space1.marker);
 
+  var x = prompt("Which space to put an X in?");
+  board.spaces[x].updateMarker(userType);
+  displayBoard(board);
+  // Input: X (or O), win state, num games won
+  // player1 = new Player(name, userType, iWon, winTotal);
+  var player1 = new Player("", userType, false, 0);
+//  var player2 = new Player("", "", false, 0);
+  player1.getName();
+  console.log("Player1's name is: " + player1.name);
 });

@@ -20,7 +20,7 @@ Output: Board graphic
 Input coordinate/space#, marker
 Output: Accessible object in the spaces array in Board object
 
-6. Program puts an X or O on the board < -- 
+6. Program puts an X or O on the board
 Input: X or O
 Output: X or O on the board randomly
 
@@ -28,11 +28,11 @@ Output: X or O on the board randomly
 Input: X (or O), win state, num games won
 Output: Accessible object
 
-7. Program establishes board object
+8. Program establishes board object
 Input: array of space objects, fills spaces by some method
 Output: Accessible object
 
-8. Program/board appropriately displays Xs & Os where players click on board
+9. Program/board appropriately displays Xs & Os where players click on board <--
 Input: X or O player clicks on space
 Output: X or O displays on screen in right space
 
