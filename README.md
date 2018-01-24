@@ -32,15 +32,21 @@ Output: Accessible object
 Input: array of space objects, fills spaces by some method
 Output: Accessible object
 
-9. Program/board appropriately displays Xs & Os where players click on board <--
+9. Program/board appropriately displays Xs (or Os) where player clicks on board
 Input: X or O player clicks on space
 Output: X or O displays on screen in right space
 
-9. Program checks for win condition (3 X or 3 O in a row) horizontally or vertically
+10. Add a second player
+  Input: Prompted player 2 name
+  Output: "Welcome player (name). You are (whatever the opposite of player 1 is)."
+
+
+
+n. Program checks for win condition (3 X or 3 O in a row) horizontally or vertically
 Input: 3 X or O in a row horizontally or vertically on board
 Output: "You Win!"
 
-10. Program checks for win condition (3 X or 3 O in a row) diagonally
+n. Program checks for win condition (3 X or 3 O in a row) diagonally
 Input: 3 X or O in a row diagonally on board
 Output: "You Win!"
 

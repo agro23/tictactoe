@@ -53,7 +53,7 @@ function Board(spaces) {
 }
 
 Board.prototype.buildBoard = function() {
-  for (var i = 1; i < 10; i++) {
+  for (var i = 0; i < 9; i++) {
     // this.spaces.push(buildSpace(i));
     var space = new Space(i, "_");
     this.spaces.push(space);
@@ -61,8 +61,14 @@ Board.prototype.buildBoard = function() {
   return this.spaces;
 }
 
-
-
+function putMarkerInDiv(board, userType, divNum){
+  console.log("Called me!");
+  board.spaces[divNum].updateMarker(userType);
+  for (var n=0; n <9; n++){
+    console.log(n +" = " + board.spaces[n].spaceNum);
+  }
+  // displayBoard(board);
+}
 
 // function placeInSpace(thing, coordinate) {
 //   $("#space" + coordinate).text(thing);
@@ -78,7 +84,14 @@ function displayBoard(board) {
   }
   tempBoardString += "</div>"
   $(".board").html(tempBoardString);
+  return board; // just to see
 }
+
+function updateDiv(mySpace, myUserType) {
+  var newSpace = "#space"+mySpace;
+  $(newSpace).html(myUserType);
+}
+
 
 $(document).ready(function() {
   var userType = getUser();
@@ -97,13 +110,32 @@ $(document).ready(function() {
   space1.updateMarker(userType);
   console.log("Space is now:" + space1.marker);
 
-  var x = prompt("Which space to put an X in?");
-  board.spaces[x].updateMarker(userType);
-  displayBoard(board);
+  // var x = prompt("Which space to put a marker in?");
+  // board.spaces[x].updateMarker(userType);
+  // displayBoard(board);
   // Input: X (or O), win state, num games won
   // player1 = new Player(name, userType, iWon, winTotal);
   var player1 = new Player("", userType, false, 0);
 //  var player2 = new Player("", "", false, 0);
   player1.getName();
   console.log("Player1's name is: " + player1.name);
+
+  // for (var i = 0; i < 9; i++) {
+  //   console.log("Space " + i + "= " + board.spaces[i].spaceNum);
+  // }
+  n = 1;
+  $(function() {
+    $(".experiment div").click(function(){
+      //  console.log("The div was clicked!");
+      //  var divName = this.id[this.id.length];
+      var divNum = this.id[this.id.length-1];
+
+      //  console.log("div id is: " + divNum);
+      putMarkerInDiv(board, userType, divNum);
+      updateDiv(divNum, userType);
+      // console.log("Board is : " + board.spaces[divNum].spaceNum);
+    });
+  });
+
+
 });
