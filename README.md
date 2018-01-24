@@ -40,14 +40,19 @@ Output: X or O displays on screen in right space
   Input: Prompted player 2 name
   Output: "Welcome player (name). You are (whatever the opposite of player 1 is)."
 
-n. Program checks for win condition (3 X or 3 O in a row) horizontally or vertically
+11. Program checks for win condition (3 X or 3 O in a row) horizontally or vertically
 Input: 3 X or O in a row horizontally or vertically on board
-Output: "You Win!"
+Output: "X (or O) Wins!"
 
-n. Program checks for win condition (3 X or 3 O in a row) diagonally
+12. Program checks for win condition (3 X or 3 O in a row) diagonally
 Input: 3 X or O in a row diagonally on board
-Output: "You Win!"
+Output: X (or O) Wins!"
 
+know which player's turn it is
+
+be able to move to the next turn
+
+and be able to tell if the game is over or not.
 
 -----
 Other stuff

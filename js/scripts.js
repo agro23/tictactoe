@@ -96,52 +96,58 @@ function switchUser(myUserType) {
   console.log("i'm in the function" + myUserType);
   if (myUserType === "X") {
     myUserType = "O";
+    $("#turn-update").html("<h2>It's O's turn</h2>");
     return myUserType;
   }
   if (myUserType === "O") {
     myUserType = "X";
+    $("#turn-update").html("<h2>It's X's turn</h2>");
     return myUserType;
   }
 }
 
+
+
 function checkWinner(myBoard) {
   console.log(myBoard.spaces[0].marker);
   if ((myBoard.spaces[0].marker === "X") && (myBoard.spaces[3].marker === "X") && (myBoard.spaces[6].marker === "X")) {
-    console.log("user type x is winner");
+    $("#turn-update").html("<h2>X is the winner!</h2>");
   } else if ((myBoard.spaces[1].marker === "X") && (myBoard.spaces[4].marker === "X") && (myBoard.spaces[7].marker === "X")) {
-    console.log("user type x is winner");
+    $("#turn-update").html("<h2>X is the winner!</h2>");
   } else if ((myBoard.spaces[2].marker === "X") && (myBoard.spaces[5].marker === "X") && (myBoard.spaces[8].marker === "X")) {
-    console.log("user type x is winner");
+    $("#turn-update").html("<h2>X is the winner!</h2>");
   } else if ((myBoard.spaces[0].marker === "X") && (myBoard.spaces[1].marker === "X") && (myBoard.spaces[2].marker === "X")) {
-    console.log("user type x is winner");
+    $("#turn-update").html("<h2>X is the winner!</h2>");
   } else if ((myBoard.spaces[3].marker === "X") && (myBoard.spaces[4].marker === "X") && (myBoard.spaces[5].marker === "X")) {
-    console.log("user type x is winner");
+    $("#turn-update").html("<h2>X is the winner!</h2>");
   } else if ((myBoard.spaces[6].marker === "X") && (myBoard.spaces[7].marker === "X") && (myBoard.spaces[8].marker === "X")) {
-    console.log("user type x is winner");
+    $("#turn-update").html("<h2>X is the winner!</h2>");
   } else if ((myBoard.spaces[0].marker === "X") && (myBoard.spaces[4].marker === "X") && (myBoard.spaces[8].marker === "X")) {
-    console.log("user type x is winner");
+    $("#turn-update").html("<h2>X is the winner!</h2>");
   } else if ((myBoard.spaces[2].marker === "X") && (myBoard.spaces[4].marker === "X") && (myBoard.spaces[6].marker === "X")) {
-    console.log("user type x is winner");
+    $("#turn-update").html("<h2>X is the winner!</h2>");
   } else if ((myBoard.spaces[0].marker === "O") && (myBoard.spaces[3].marker === "O") && (myBoard.spaces[6].marker === "O")) {
-    console.log("user type o is winner");
+    $("#turn-update").html("<h2>O is the winner!</h2>");
   } else if ((myBoard.spaces[1].marker === "O") && (myBoard.spaces[4].marker === "O") && (myBoard.spaces[7].marker === "O")) {
-    console.log("user type o is winner");
+    $("#turn-update").html("<h2>O is the winner!</h2>");
   } else if ((myBoard.spaces[2].marker === "O") && (myBoard.spaces[5].marker === "O") && (myBoard.spaces[8].marker === "O")) {
-    console.log("user type o is winner");
+    $("#turn-update").html("<h2>O is the winner!</h2>");
   } else if ((myBoard.spaces[0].marker === "O") && (myBoard.spaces[1].marker === "O") && (myBoard.spaces[2].marker === "O")) {
-    console.log("user type o is winner");
+    $("#turn-update").html("<h2>O is the winner!</h2>");
   } else if ((myBoard.spaces[3].marker === "O") && (myBoard.spaces[4].marker === "O") && (myBoard.spaces[5].marker === "O")) {
-    console.log("user type o is winner");
+    $("#turn-update").html("<h2>O is the winner!</h2>");
   } else if ((myBoard.spaces[6].marker === "O") && (myBoard.spaces[7].marker === "O") && (myBoard.spaces[8].marker === "O")) {
-    console.log("user type o is winner");
+    $("#turn-update").html("<h2>O is the winner!</h2>");
   } else if ((myBoard.spaces[0].marker === "O") && (myBoard.spaces[4].marker === "O") && (myBoard.spaces[8].marker === "O")) {
-    console.log("user type o is winner");
+    $("#turn-update").html("<h2>O is the winner!</h2>");
   } else if ((myBoard.spaces[2].marker === "O") && (myBoard.spaces[4].marker === "O") && (myBoard.spaces[6].marker === "O")) {
-    console.log("user type o is winner");
+    $("#turn-update").html("<h2>O is the winner!</h2>");
   } else if ( (myBoard.spaces[0].marker != "_") && (myBoard.spaces[1].marker != "_") && (myBoard.spaces[2].marker != "_") && (myBoard.spaces[3].marker != "_") && (myBoard.spaces[4].marker != "_") && (myBoard.spaces[5].marker != "_") && (myBoard.spaces[6].marker != "_") && (myBoard.spaces[7].marker != "_") && (myBoard.spaces[8].marker != "_") ) {
-    console.log("it's a draw");
+    $("#turn-update").html("<h2>It's a draw!</h2>");
   }
 }
+
+
 
 $(document).ready(function() {
   var userType = getUser();
@@ -191,6 +197,8 @@ var winner = false;
       var divNum = this.id[this.id.length-1];
 
       //  console.log("div id is: " + divNum);
+
+      //call tell whose turn here
       putMarkerInDiv(board, userType, divNum);
       updateDiv(divNum, userType);
       userType = switchUser(userType);
