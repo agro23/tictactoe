@@ -1,0 +1,21 @@
+.experiment {
+  display:flex;
+  width: 300px;
+  height: 100px;
+}
+
+.experiment div {
+  flex-grow: 1;
+  border: 1px solid red;
+}
+
+/* .board {
+  display:flex;
+ width: 300px;
+  height: 300px;
+}
+
+.board div {
+  flex-grow: 1;
+  border: 1px solid red;
+}*/ 
