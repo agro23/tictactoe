@@ -40,8 +40,6 @@ Output: X or O displays on screen in right space
   Input: Prompted player 2 name
   Output: "Welcome player (name). You are (whatever the opposite of player 1 is)."
 
-
-
 n. Program checks for win condition (3 X or 3 O in a row) horizontally or vertically
 Input: 3 X or O in a row horizontally or vertically on board
 Output: "You Win!"

@@ -62,11 +62,11 @@ Board.prototype.buildBoard = function() {
 }
 
 function putMarkerInDiv(board, userType, divNum){
-  console.log("Called me!");
+  // console.log("Called me!");
   board.spaces[divNum].updateMarker(userType);
-  for (var n=0; n <9; n++){
-    console.log(n +" = " + board.spaces[n].spaceNum);
-  }
+  // for (var n=0; n <9; n++){
+  //   console.log(n +" = " + board.spaces[n].spaceNum);
+  // }
   // displayBoard(board);
 }
 
@@ -105,10 +105,10 @@ $(document).ready(function() {
   displayBoard(board);
   // console.log("board space 1 = " + board.spaces[1]);
 
-  space1 = new Space(1, "_");
-  console.log("Space starts as:" + space1.marker);
-  space1.updateMarker(userType);
-  console.log("Space is now:" + space1.marker);
+  // space1 = new Space(1, "_");
+  // console.log("Space starts as:" + space1.marker);
+  // space1.updateMarker(userType);
+  // console.log("Space is now:" + space1.marker);
 
   // var x = prompt("Which space to put a marker in?");
   // board.spaces[x].updateMarker(userType);
@@ -116,14 +116,36 @@ $(document).ready(function() {
   // Input: X (or O), win state, num games won
   // player1 = new Player(name, userType, iWon, winTotal);
   var player1 = new Player("", userType, false, 0);
-//  var player2 = new Player("", "", false, 0);
   player1.getName();
-  console.log("Player1's name is: " + player1.name);
+  if (userType === "X") {
+    userType = "O";
+  } else {
+    userType = "X";
+  }
+  var player2 = new Player("", userType, false, 0);
+
+  player2.getName()
+  console.log("Player1's name is: " + player1.name + " they chose " + player1.userType);
+  console.log("Player2's name is: " + player2.name + " they have " + player2.userType);
 
   // for (var i = 0; i < 9; i++) {
   //   console.log("Space " + i + "= " + board.spaces[i].spaceNum);
   // }
-  n = 1;
+var winner = false;
+function switchUser(myUserType) {
+  console.log("i'm in the function" + myUserType);
+  if (myUserType === "X") {
+    myUserType = "O";
+    return myUserType;
+  }
+  if (myUserType === "O") {
+    myUserType = "X";
+    return myUserType;
+  }
+
+
+}
+
   $(function() {
     $(".experiment div").click(function(){
       //  console.log("The div was clicked!");
@@ -133,6 +155,10 @@ $(document).ready(function() {
       //  console.log("div id is: " + divNum);
       putMarkerInDiv(board, userType, divNum);
       updateDiv(divNum, userType);
+      userType = switchUser(userType);
+      console.log("user is now" + userType);
+
+
       // console.log("Board is : " + board.spaces[divNum].spaceNum);
     });
   });
