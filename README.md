@@ -16,11 +16,15 @@ Output: X or O on the board somewhere
 Input: Start Program
 Output: Board graphic
 
-5. Program puts an X or O on the board
+5. Program establishes space object
+Input coordinate/space#, marker
+Output: Accessible object in the spaces array in Board object
+
+6. Program puts an X or O on the board < -- 
 Input: X or O
 Output: X or O on the board randomly
 
-6. Program establishes player object
+7. Program establishes player object
 Input: X (or O), win state, num games won
 Output: Accessible object
 
