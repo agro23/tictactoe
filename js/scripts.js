@@ -49,6 +49,14 @@ Space.prototype.updateMarker = function(marker) {
   return this.marker;
 }
 
+Space.prototype.checkEmpty = function() {
+  if (this.marker === "_") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 
 function Board(spaces) {
   this.spaces = spaces; //array of spaces
@@ -199,20 +207,42 @@ var winner = false;
 
 if (player1.name != null && player1.name != "" && player2.name != null && player2.name != "") {
 
-      if  ( (player1.isHuman === true) || (player2.isHuman === true) ) {
-
+      // if  ( (player1.isHuman === true) || (player2.isHuman === true) ) {   // need to know which player
+      if ((player1.name != "COMPUTER")  &&  (player2.name != "COMPUTER")) {
         divNum = this.id[this.id.length-1];
+        // both are human who cares who uses the mouse
+      } else if ((player1.name === "COMPUTER")  &&  (player2.name != "COMPUTER")) {
 
+        do {
+          var x = Math.floor(Math.random() * 8);
+          if (board.spaces[x].checkEmpty()) {
+            board.spaces[x].updateMarker(userType);
+            divNum = x;
+          }
+        } while (board.spaces[x].checkEmpty());
+
+        // dumb computer player1 gets a random number until that space has a "_" then put userType in space.
+        // else smart computer 1 picks from optimum move list
+        // RETURNING: correct divNum
+        console.log("This would be the computer player1's turn!");
+      //  divNum = this.id[this.id.length-1]; some random possible div
+
+      } else if ((player1.name != "COMPUTER")  &&  (player2.name === "COMPUTER")) {
+        // computer as 2 takes a turn.
+        console.log("This would be the computer player2's turn!");
+        do {
+          var x = Math.floor(Math.random() * 8);
+          console.log(x);
+          if (board.spaces[x].checkEmpty()) {
+            board.spaces[x].updateMarker(userType);
+            divNum = x;
+          }
+        } while (board.spaces[x].checkEmpty());
+        // divNum = this.id[this.id.length-1]; some random possible div
       } else {
-        
-        // computer as 1 or 2 takes a turn.
-        // compuuter looks for available squares
-        // if computer is dumb it looks for a choice of available squares else picks from optimum move list
-        // updateDiv
-        // RETURNING: divNum
-        alert("This would be the computer's turn!");
-        divNum = this.id[this.id.length-1];
+        // whichever computer takes a turn.
       }
+
       putMarkerInDiv(board, userType, divNum);
       updateDiv(divNum, userType);
       userType = switchUser(userType); // don't switch user at the beginning.
@@ -321,6 +351,11 @@ if (player1.name != null && player1.name != "" && player2.name != null && player
     $("#p2-computer").click(function(){
       // var divNum = this.id[this.id.length-1];
       console.log("Clicked the computer button for player 2.");
+
+      var htmlString = "<div class='col-md-10'><h2>Player 2: COMPUTER</h2></div>";
+      player2.setName("COMPUTER");
+      $("#player2").html(htmlString);
+      console.log("Player2's name is: " + player2.name + " they chose " + player2.userType);
       // putMarkerInDiv(board, userType, divNum);
       // updateDiv(divNum, userType);
       // userType = switchUser(userType);
