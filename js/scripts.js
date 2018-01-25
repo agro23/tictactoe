@@ -3,6 +3,7 @@ function getUser() {
   while (user !== "X" && user !== "O") {
     user = prompt("Do you want to be X or O?").toUpperCase();
    }
+   user = switchUser(user); // swithc user back to the actual choice for now
   return user;
 }
 
@@ -112,6 +113,7 @@ function checkWinner(myBoard) {
   console.log(myBoard.spaces[0].marker);
   if ((myBoard.spaces[0].marker === "X") && (myBoard.spaces[3].marker === "X") && (myBoard.spaces[6].marker === "X")) {
     $("#turn-update").html("<h2>X is the winner!</h2>");
+    return true;
   } else if ((myBoard.spaces[1].marker === "X") && (myBoard.spaces[4].marker === "X") && (myBoard.spaces[7].marker === "X")) {
     $("#turn-update").html("<h2>X is the winner!</h2>");
   } else if ((myBoard.spaces[2].marker === "X") && (myBoard.spaces[5].marker === "X") && (myBoard.spaces[8].marker === "X")) {
@@ -146,8 +148,6 @@ function checkWinner(myBoard) {
     $("#turn-update").html("<h2>It's a draw!</h2>");
   }
 }
-
-
 
 $(document).ready(function() {
   var userType = getUser();
@@ -202,14 +202,78 @@ var winner = false;
       //call tell whose turn here
       putMarkerInDiv(board, userType, divNum);
       updateDiv(divNum, userType);
-      userType = switchUser(userType);
+      userType = switchUser(userType); // don't switch user at the beginning.
       console.log("user is now" + userType);
-      checkWinner(board);
+      if (checkWinner(board)) {
+        alert("process winner and offer new game. Also disable/unbind all clicks first.")
+      };
       // $(this).attr("disabled", "disabled");
       $(this).unbind("click");   // this unbinds ... how to reset
       // console.log("Board is : " + board.spaces[divNum].spaceNum);
     });
   });
 
+  $(function() {
+    $("#p1-human").click(function(){
+      // var divNum = this.id[this.id.length-1];
+      console.log("Clicked the human button for player 1.");
+      $(".player1-visible").hide();
+      $("#player1-name").show();
+
+      // putMarkerInDiv(board, userType, divNum);
+      // updateDiv(divNum, userType);
+      // userType = switchUser(userType);
+      // console.log("user is now" + userType);
+      // checkWinner(board);
+      // // $(this).attr("disabled", "disabled");
+      $(this).unbind("click");   // this unbinds ... how to reset
+      // console.log("Board is : " + board.spaces[divNum].spaceNum);
+    });
+  });
+
+  $(function() {
+    $("#p2-human").click(function(){
+      // var divNum = this.id[this.id.length-1];
+      console.log("Clicked the human button for player 2.");
+      // putMarkerInDiv(board, userType, divNum);
+      // updateDiv(divNum, userType);
+      // userType = switchUser(userType);
+      // console.log("user is now" + userType);
+      // checkWinner(board);
+      // // $(this).attr("disabled", "disabled");
+      $(this).unbind("click");   // this unbinds ... how to reset
+      // console.log("Board is : " + board.spaces[divNum].spaceNum);
+    });
+  });
+
+  $(function() {
+    $("#p1-computer").click(function(){
+      // var divNum = this.id[this.id.length-1];
+      console.log("Clicked the computer button for player 1.");
+      // putMarkerInDiv(board, userType, divNum);
+      // updateDiv(divNum, userType);
+      // userType = switchUser(userType);
+      // console.log("user is now" + userType);
+      // checkWinner(board);
+      // // $(this).attr("disabled", "disabled");
+      $(this).unbind("click");   // this unbinds ... how to reset
+      // console.log("Board is : " + board.spaces[divNum].spaceNum);
+    });
+  });
+
+  $(function() {
+    $("#p2-computer").click(function(){
+      // var divNum = this.id[this.id.length-1];
+      console.log("Clicked the computer button for player 2.");
+      // putMarkerInDiv(board, userType, divNum);
+      // updateDiv(divNum, userType);
+      // userType = switchUser(userType);
+      // console.log("user is now" + userType);
+      // checkWinner(board);
+      // // $(this).attr("disabled", "disabled");
+      $(this).unbind("click");   // this unbinds ... how to reset
+      // console.log("Board is : " + board.spaces[divNum].spaceNum);
+    });
+  });
 
 });
