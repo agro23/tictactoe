@@ -16,17 +16,18 @@ function buildSpace(coordinate) {
 //   $(".board").html(thing);
 // }
 
-function Player(name, userType, iWon, winTotal) {
+function Player(name, userType, iWon, winTotal, isHuman) {
   this.name = name;
   this.userType = userType;
   this.iWon = iWon;
   this.winTotal = winTotal;
+  this.isHuman = isHuman;
 }
 
-Player.prototype.getName = function(name) {
-  if (this.name === "" || this.name === null ) {
-    var name = prompt("What is your name?");
-  }
+Player.prototype.setName = function(name) {
+  // if (this.name === "" || this.name === null ) {
+  //   var name = prompt("What is your name?");
+  // }
   this.name = name;
   return name;
 }
@@ -150,8 +151,11 @@ function checkWinner(myBoard) {
 }
 
 $(document).ready(function() {
-  var userType = getUser();
+  // var userType = getUser();
+  userType="X"; // first player is auto X
   console.log("user type = " + userType);
+  var player1 = new Player("", userType, false, 0, true);
+  var player2 = new Player("", "O", false, 0, true);
 
   //displayßSpace(buildSpace(0));
   // placeInSpace(userType, 0);
@@ -171,45 +175,89 @@ $(document).ready(function() {
   // displayBoard(board);
   // Input: X (or O), win state, num games won
   // player1 = new Player(name, userType, iWon, winTotal);
-  var player1 = new Player("", userType, false, 0);
-  player1.getName();
-  if (userType === "X") {
-    userType = "O";
-  } else {
-    userType = "X";
-  }
-  var player2 = new Player("", userType, false, 0);
+  // player1.getName();
+  // if (userType === "X") {
+  //   userType = "O";
+  // } else {
+  //   userType = "X";
+  // }
+  // var player2 = new Player("", userType, false, 0);
 
-  player2.getName()
-  console.log("Player1's name is: " + player1.name + " they chose " + player1.userType);
-  console.log("Player2's name is: " + player2.name + " they have " + player2.userType);
+  // player2.getName()
 
   // for (var i = 0; i < 9; i++) {
   //   console.log("Space " + i + "= " + board.spaces[i].spaceNum);
   // }
 var winner = false;
 
-
   $(function() {
     $(".experiment div").click(function(){
+      var divNum = 0;
       // if ( this).attr
       // //  console.log("The div was clicked!");
       //  var divName = this.id[this.id.length];
-      var divNum = this.id[this.id.length-1];
 
-      //  console.log("div id is: " + divNum);
+if (player1.name != null && player1.name != "" && player2.name != null && player2.name != "") {
 
-      //call tell whose turn here
+      if  ( (player1.isHuman === true) || (player2.isHuman === true) ) {
+
+        divNum = this.id[this.id.length-1];
+
+      } else {
+        
+        // computer as 1 or 2 takes a turn.
+        // compuuter looks for available squares
+        // if computer is dumb it looks for a choice of available squares else picks from optimum move list
+        // updateDiv
+        // RETURNING: divNum
+        alert("This would be the computer's turn!");
+        divNum = this.id[this.id.length-1];
+      }
       putMarkerInDiv(board, userType, divNum);
       updateDiv(divNum, userType);
       userType = switchUser(userType); // don't switch user at the beginning.
-      console.log("user is now" + userType);
-      if (checkWinner(board)) {
-        alert("process winner and offer new game. Also disable/unbind all clicks first.")
-      };
-      // $(this).attr("disabled", "disabled");
-      $(this).unbind("click");   // this unbinds ... how to reset
-      // console.log("Board is : " + board.spaces[divNum].spaceNum);
+      console.log("user is now " + userType);
+
+        if (checkWinner(board)) {
+          console.log("process winner and offer new game. Also disable/unbind all clicks first.")
+        };
+        // $(this).attr("disabled", "disabled");
+        $(this).unbind("click");   // this unbinds ... how to reset
+        // console.log("Board is : " + board.spaces[divNum].spaceNum);
+}
+
+    });
+  });
+
+  $(function() {
+    $("#player1-name").submit(function(event){
+      event.preventDefault();
+      // var divNum = this.id[this.id.length-1];
+      console.log("Clicked the SUBMIT button for player 1.");
+      $("#player1-name").hide();
+      console.log("Got player 1 submit");
+      var htmlString = "<div class='col-md-10'><h2>Player 1: " + $("#player-1").val() + "</h2></div>";
+      player1.setName($("#player-1").val());
+      $("#player1").html(htmlString);
+      console.log("Player1's name is: " + player1.name + " they chose " + player1.userType);
+
+      $(this).unbind("submit");   // Do we need this?
+    });
+  });
+
+  $(function() {
+    $("#player2-name").submit(function(event){
+      event.preventDefault();
+      // var divNum = this.id[this.id.length-1];
+      console.log("Clicked the SUBMIT button for player 2.");
+      $("#player1-name").hide();
+      console.log("Got player 2 submit");
+      var htmlString = "<div class='col-md-10'><h2>Player 2: " + $("#player-2").val() + "</h2></div>";
+      player2.setName($("#player-2").val());
+      $("#player2").html(htmlString);
+      console.log("Player2's name is: " + player2.name + " they have " + player2.userType);
+
+      $(this).unbind("submit");   // Do we need this?
     });
   });
 
@@ -235,6 +283,8 @@ var winner = false;
     $("#p2-human").click(function(){
       // var divNum = this.id[this.id.length-1];
       console.log("Clicked the human button for player 2.");
+      $(".player2-visible").hide();
+      $("#player2-name").show();
       // putMarkerInDiv(board, userType, divNum);
       // updateDiv(divNum, userType);
       // userType = switchUser(userType);
@@ -250,6 +300,12 @@ var winner = false;
     $("#p1-computer").click(function(){
       // var divNum = this.id[this.id.length-1];
       console.log("Clicked the computer button for player 1.");
+
+      var htmlString = "<div class='col-md-10'><h2>Player 1: COMPUTER</h2></div>";
+      player1.setName("COMPUTER");
+      $("#player1").html(htmlString);
+      console.log("Player1's name is: " + player1.name + " they chose " + player1.userType);
+
       // putMarkerInDiv(board, userType, divNum);
       // updateDiv(divNum, userType);
       // userType = switchUser(userType);

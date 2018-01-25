@@ -48,12 +48,33 @@ Output: "X (or O) Wins!"
 Input: 3 X or O in a row diagonally on board
 Output: X (or O) Wins!"
 
-know which player's turn it is
+13. Enable form to take input of player1 name and populate player1 object.
+Input: Player 1 name
+Output: Row changes to show player 1 name.
 
-be able to move to the next turn
+14. Enable form to take input of player2 name and populate player2 object.
+Input: Player 1 name
+Output: Row changes to show player 2 name.
 
-and be able to tell if the game is over or not.
+15. Don't let the game play until names are input.
+Input: Player names
+Output: Player names to screen
 
+16. Know when the game ends
+Input: a player places a marker that completes 3 in a row of their marker.
+Output: "Player n won the game"
+
+17. Add a random computer player.
+
+n-2. When someone wins blank the board and ask if they want to play again.
+Input: "Do you want to play again?"
+Output: resets the board and starts a new game
+
+N-1. Display user's number of games won
+
+N. when player wins, add to their score total
+Input: (player wins)
+output: adds to score and displays on panel.
 -----
 Other stuff
 
