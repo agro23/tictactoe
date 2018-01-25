@@ -9,6 +9,18 @@
   border: 1px solid red;
 }
 
+.jumbotron {
+  text-align: center;
+}
+
+#player1-name {
+  display: none;
+}
+
+#player2-name {
+  display: none;
+}
+
 /* .board {
   display:flex;
  width: 300px;
@@ -18,4 +30,4 @@
 .board div {
   flex-grow: 1;
   border: 1px solid red;
-}*/ 
+}*/

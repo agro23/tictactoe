@@ -89,6 +89,7 @@ function displayBoard(board) {
 
 function updateDiv(mySpace, myUserType) {
   var newSpace = "#space"+mySpace;
+  // console.log("Parent = " + newSpace.parent());
   $(newSpace).html(myUserType);
 }
 
@@ -105,7 +106,6 @@ function switchUser(myUserType) {
     return myUserType;
   }
 }
-
 
 
 function checkWinner(myBoard) {
@@ -192,7 +192,8 @@ var winner = false;
 
   $(function() {
     $(".experiment div").click(function(){
-      //  console.log("The div was clicked!");
+      // if ( this).attr
+      // //  console.log("The div was clicked!");
       //  var divName = this.id[this.id.length];
       var divNum = this.id[this.id.length-1];
 
@@ -204,8 +205,8 @@ var winner = false;
       userType = switchUser(userType);
       console.log("user is now" + userType);
       checkWinner(board);
-
-
+      // $(this).attr("disabled", "disabled");
+      $(this).unbind("click");   // this unbinds ... how to reset
       // console.log("Board is : " + board.spaces[divNum].spaceNum);
     });
   });
